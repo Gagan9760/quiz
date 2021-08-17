@@ -1,11 +1,13 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { questions } from './question'
 
-const Main = ({selectedQues,setSelectedQues}) => {
+const Main = ({ selectedQues, setSelectedQues,setEndQues,prize }) => {
     const [correctAns, setCorrectAns] = useState(0)
-    const [color,setColor] = useState(false)
-    const [exit,setExit] = useState(3)
-    const [timer,setTimer] = useState(false)
+    const [color, setColor] = useState(false)
+    const [exit, setExit] = useState(3)
+    const [timer, setTimer] = useState(false)
+    const [end, setEnd] = useState(false)
+    
     var time = null
     const findAnswer = (c, a) => {
         if (a === c) {
@@ -13,24 +15,31 @@ const Main = ({selectedQues,setSelectedQues}) => {
             setColor(true)
         } else {
             setColor(true)
-            setCorrectAns(c)                 
+            setCorrectAns(c)
         }
-        setTimer(true)
-        setTimeout(()=>{
-            setSelectedQues((prev) => prev + 1)
-            setCorrectAns(null)
-            setColor(null)
-            clearInterval(time)
-        },3000)
-        time = setInterval(() => {
-            setExit((prev)=>prev-1)
-        }, 1000);
-        
+        if (selectedQues === questions.length) {
+            setEnd(true)
+            setEndQues(selectedQues)
+        } else {
+            setTimer(true)
+
+            time = setInterval(() => {
+                setExit((prev) => prev - 1)
+            }, 1000);
+
+            setTimeout(() => {
+                setSelectedQues((prev) => prev + 1)
+                setCorrectAns(null)
+                setColor(null)
+                clearInterval(time)
+            }, 3000)
+
+        }
     }
     useEffect(() => {
         setExit(3)
         setTimer(false)
-    },[selectedQues])
+    }, [selectedQues])
     return (
         <div className="main">
             {questions.map((q) => {
@@ -44,7 +53,7 @@ const Main = ({selectedQues,setSelectedQues}) => {
                                 </div>
                                 <div className="ans">
                                     <li key={q.answer1.id} className=
-                                    {`option ${color?(correctAns===q.answer1.id?`correct`:`wrong`):``}`}
+                                        {`option ${color ? (correctAns === q.answer1.id ? `correct` : `wrong`) : ``}`}
                                         onClick={() => {
                                             findAnswer(q.correct, q.answer1.id)
 
@@ -52,7 +61,7 @@ const Main = ({selectedQues,setSelectedQues}) => {
                                     >
                                         {q.answer1.text}
                                     </li>
-                                    <li key={q.answer2.id} className={`option ${color?correctAns===q.answer2.id?`correct`:`wrong`:``}`}
+                                    <li key={q.answer2.id} className={`option ${color ? correctAns === q.answer2.id ? `correct` : `wrong` : ``}`}
                                         onClick={() => {
 
                                             // setSelectedAns(2)
@@ -62,7 +71,7 @@ const Main = ({selectedQues,setSelectedQues}) => {
                                     >
                                         {q.answer2.text}
                                     </li>
-                                    <li key={q.answer3.id} className={`option ${color?correctAns===q.answer3.id?`correct`:`wrong`:``}`}
+                                    <li key={q.answer3.id} className={`option ${color ? correctAns === q.answer3.id ? `correct` : `wrong` : ``}`}
                                         onClick={() => {
                                             findAnswer(q.correct, q.answer3.id)
 
@@ -70,7 +79,7 @@ const Main = ({selectedQues,setSelectedQues}) => {
                                     >
                                         {q.answer3.text}
                                     </li>
-                                    <li key={q.answer4.id} className={`option ${color?correctAns===q.answer4.id?`correct`:`wrong`:``}`}
+                                    <li key={q.answer4.id} className={`option ${color ? correctAns === q.answer4.id ? `correct` : `wrong` : ``}`}
                                         onClick={() => {
                                             findAnswer(q.correct, q.answer4.id)
 
@@ -87,6 +96,7 @@ const Main = ({selectedQues,setSelectedQues}) => {
                 )
             })}
             {timer && <h1>Next question in: {exit} seconds</h1>}
+            {end && <h1>{`You won $ ${prize} `}</h1>}
 
         </div >
     )
