@@ -96,7 +96,7 @@ const Main = ({ selectedQues, setSelectedQues,setEndQues,prize }) => {
                 )
             })}
             
-            {timer && <div className="modal"> <h1>Next question in: {exit} seconds</h1></div>}
+            {timer && <div className="modal"> <h1>{`Next question in: ${exit} seconds`}</h1></div>}
             {end && <div className="modal"> <h1>{`You won $ ${prize} `}</h1></div>}
             
         </div >
