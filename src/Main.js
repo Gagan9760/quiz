@@ -9,13 +9,18 @@ const Main = ({ selectedQues, setSelectedQues,setEndQues,prize }) => {
     const [end, setEnd] = useState(false)
     
     var time = null
-    const findAnswer = (c, a) => {
-        if (a === c) {
-            setCorrectAns(c)
+    const findAnswer = (correct, answer) => {
+        if (answer === correct) {
+            setCorrectAns(correct)
+            setEndQues(selectedQues)
             setColor(true)
         } else {
             setColor(true)
-            setCorrectAns(c)
+            setEnd(true)
+            setCorrectAns(correct)
+            
+            return
+            
         }
         if (selectedQues === questions.length) {
             setEnd(true)

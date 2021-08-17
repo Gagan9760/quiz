@@ -4,8 +4,8 @@ import { money } from './data'
 
 const Side = ({selectedQues,setPrize,endQues}) => {
     const am = money.map((m)=>m.amount)
-    
-    const finalAmount = am.slice(-endQues).reduce((acc,crr)=>acc+crr)
+    console.log(am.slice(10));
+    const finalAmount = (endQues===0?0:am.slice(-endQues).reduce((acc,crr)=>acc+crr))
     console.log(finalAmount);
     setPrize(finalAmount)
 
