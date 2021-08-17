@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+.body{
+    display: flex;
+    height: 100vh;
+    font-family: 'Nunito', sans-serif;
+}
+.main{
+    background-color: rgb(164, 164, 236);
+    width: 70vw;
+}
+.side{
+    background-color:  #06134c ;
+    width: 30vw;
+    color:white
+}
+.money{
+    
+    list-style: none;
+    margin: 10px 20px 10px 20px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 50px;
+    font-size: 15px
+}
+.money.active{
+    background-color: teal;
+    border: 1px solid white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.que{
+    background-color: #06134c;
+    color: white;
+    border: 1px solid white;
+    width: 90%;
+    padding: 30px;
+    border-radius: 50px;
+    text-align: center;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.ans{
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
 }
-
-.App-link {
-  color: #61dafb;
+.ans li{
+    border-radius: 50px;
+    margin: 20px 5px;
+    padding: 20px;
+    
+    width:500px;
+    list-style: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.option{
+    background-color: #06134c;
+    color: white;
+}
+.option.correct{
+    background-color: green;
+}
+.option.wrong{
+    background-color: red;
 }
