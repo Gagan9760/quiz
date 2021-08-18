@@ -105,3 +105,28 @@
     border-radius: 20px;
     cursor: pointer;
 }
+
+@media only screen and (max-width:500px){
+    .body{
+        flex-direction: column;
+    }
+    .side{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .money{
+        padding: 10px;
+    }
+    .main{
+        padding-top: 20px;
+        width: 100vw;
+    }
+    .ans{
+        display: block;
+    }
+    .ans li{
+        width: 300px;
+    }
+}
