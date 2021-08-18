@@ -117,7 +117,8 @@
         flex-wrap: wrap;
     }
     .money{
-        padding: 10px;
+        padding: 3px 10px;
+        
     }
     .main{
         padding-top: 20px;
