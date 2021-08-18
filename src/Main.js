@@ -1,14 +1,53 @@
 import React, { useState, useEffect } from 'react'
 import { questions } from './question'
+import { AnimatePresence, motion } from 'framer-motion'
 
-const Main = ({ selectedQues, setSelectedQues,setEndQues,prize }) => {
+const parentVariant ={
+    initial:{
+        opacity:1
+    },
+    final:{
+        opacity:1,
+        transition:{
+            staggerChildren:1
+        }
+    }
+}
+const quesVar = {
+    initial:{
+        opacity:0
+    },
+    final:{
+        opacity:1
+    }
+}
+const answerVariant = {
+    initial:{
+        opacity:0
+    },
+    final:{
+        opacity:1
+       
+    },
+    hover: {
+        scale: 1.1,
+        boxShadow: "0px 5px 15px 0px rgba(0,0,0,0.69)"
+    },
+    tap: {
+        scale: 0.9
+    }
+}
+const Main = ({ selectedQues, setSelectedQues, setEndQues, prize }) => {
     const [correctAns, setCorrectAns] = useState(0)
     const [color, setColor] = useState(false)
     const [exit, setExit] = useState(3)
     const [timer, setTimer] = useState(false)
     const [end, setEnd] = useState(false)
-    
+
     var time = null
+    const refresh = () => {
+        window.location.reload(false)
+    }
     const findAnswer = (correct, answer) => {
         if (answer === correct) {
             setCorrectAns(correct)
@@ -18,9 +57,9 @@ const Main = ({ selectedQues, setSelectedQues,setEndQues,prize }) => {
             setColor(true)
             setEnd(true)
             setCorrectAns(correct)
-            
+
             return
-            
+
         }
         if (selectedQues === questions.length) {
             setEnd(true)
@@ -46,27 +85,30 @@ const Main = ({ selectedQues, setSelectedQues,setEndQues,prize }) => {
         setTimer(false)
     }, [selectedQues])
     return (
-        <div className="main">
+        <motion.div variants={parentVariant} initial="initial" animate="final" className="main">
             {questions.map((q) => {
                 return (
                     <>
                         {selectedQues === q.id ?
                             <>
-
-                                <div className="que">
+                                <motion.div variants={quesVar}div className="que">
                                     {q.question}
-                                </div>
-                                <div className="ans">
-                                    <li key={q.answer1.id} className=
+                                </motion.div>
+                                <motion.div variants={answerVariant} className="ans">
+                                    <motion.li variants={answerVariant} whileHover="hover" whileTap="tap"
+                                        key={q.answer1.id}
+                                        className=
                                         {`option ${color ? (correctAns === q.answer1.id ? `correct` : `wrong`) : ``}`}
                                         onClick={() => {
                                             findAnswer(q.correct, q.answer1.id)
 
                                         }}
                                     >
-                                        {q.answer1.text}
-                                    </li>
-                                    <li key={q.answer2.id} className={`option ${color ? correctAns === q.answer2.id ? `correct` : `wrong` : ``}`}
+                                        A. {q.answer1.text}
+                                    </motion.li>
+                                    <motion.li variants={answerVariant} whileHover="hover" whileTap="tap"
+                                        key={q.answer2.id}
+                                        className={`option ${color ? correctAns === q.answer2.id ? `correct` : `wrong` : ``}`}
                                         onClick={() => {
 
                                             // setSelectedAns(2)
@@ -74,37 +116,58 @@ const Main = ({ selectedQues, setSelectedQues,setEndQues,prize }) => {
 
                                         }}
                                     >
-                                        {q.answer2.text}
-                                    </li>
-                                    <li key={q.answer3.id} className={`option ${color ? correctAns === q.answer3.id ? `correct` : `wrong` : ``}`}
+                                        B. {q.answer2.text}
+                                    </motion.li>
+                                    <motion.li variants={answerVariant} whileHover="hover" whileTap="tap"
+                                        key={q.answer3.id}
+                                        className={`option ${color ? correctAns === q.answer3.id ? `correct` : `wrong` : ``}`}
                                         onClick={() => {
                                             findAnswer(q.correct, q.answer3.id)
 
                                         }}
                                     >
-                                        {q.answer3.text}
-                                    </li>
-                                    <li key={q.answer4.id} className={`option ${color ? correctAns === q.answer4.id ? `correct` : `wrong` : ``}`}
+                                        C. {q.answer3.text}
+                                    </motion.li>
+                                    <motion.li variants={answerVariant} whileHover="hover" whileTap="tap"
+                                        key={q.answer4.id}
+                                        className={`option ${color ? correctAns === q.answer4.id ? `correct` : `wrong` : ``}`}
                                         onClick={() => {
                                             findAnswer(q.correct, q.answer4.id)
 
                                         }}
                                     >
-                                        {q.answer4.text}
-                                    </li>
-                                </div>
+                                        D. {q.answer4.text}
+                                    </motion.li>
+                                </motion.div>
                             </> : null
-
                         }
-
                     </>
                 )
             })}
-            
-            {timer && <div className="modal"> <h1>{`Next question in: ${exit} seconds`}</h1></div>}
-            {end && <div className="modal"> <h1>{`You won $ ${prize} `}</h1></div>}
-            
-        </div >
+            <AnimatePresence>
+                {timer && <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "tween" }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    className="modal">
+                    <h1>{`Next question in: ${exit} seconds`}</h1>
+                </motion.div>}
+                {end && <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "tween" }}
+                    className="modal">
+                    <h1>{`You won $ ${prize} `}</h1>
+                    <motion.button
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={refresh}
+                    >Try Again
+                    </motion.button>
+                </motion.div>}
+            </AnimatePresence>
+        </motion.div >
     )
 }
 

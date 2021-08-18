@@ -2,13 +2,18 @@
     display: flex;
     height: 100vh;
     font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+    background-image: url('img/1.jpg');
+    background-size: cover;
 }
 .main{
-    background-color: rgb(164, 164, 236);
+    /* background-color: rgb(164, 164, 236); */
+    
     width: 70vw;
 }
 .side{
-    background-color:  #06134c ;
+    background-color: rgba(98,11,126,0.9) ;
+    box-shadow:  0px 10px 60px rgba(0,0,0,0.75) inset;
     width: 30vw;
     color:white
 }
@@ -22,8 +27,9 @@
     font-size: 15px
 }
 .money.active{
-    background-color: teal;
-    border: 1px solid white;
+    background: #08bf5b;
+    background: linear-gradient(180deg,#08bf5b 0%, #078b07 80%);
+    border: 2px outset #daab4a;
 }
 
 .main{
@@ -34,9 +40,10 @@
 }
 
 .que{
-    background-color: #06134c;
+    background-color: #620b7e ;
+    box-shadow:  0px 5px 40px rgba(0,0,0,0.75) inset;
     color: white;
-    border: 1px solid white;
+    border: 2px outset #daab4a;
     width: 90%;
     padding: 30px;
     border-radius: 50px;
@@ -56,24 +63,30 @@
     list-style: none;
 }
 .option{
-    background-color: #06134c;
+    /* background-color: #06134c; */
+    background: #620b7e;
+    background: linear-gradient(180deg,#620b7e 0%, #2f053c 80%);
     color: white;
+    border: 2px outset #daab4a;
 }
 .option.correct{
-    background-color: green;
+    background: #08bf5b;
+    background: linear-gradient(180deg,#08bf5b 0%, #078b07 80%);
 }
 .option.wrong{
-    background-color: red;
+    background: #d92e2e;
+    background: linear-gradient(180deg,#d92e2e 0%, #981a1a 80%);
 }
 .modal{
     position: absolute;
     top:0;
     left:0;
-    background-color: rgba(0, 0,0, 0.7);
+    background-color: rgba(0, 0,0, 0.6);
     height: 100vh;
     width: 100vw;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -81,7 +94,14 @@
 .modal h1{
     color:white; 
     text-align: center;
-    font-size: 50px;
-    
-    
+    font-size: 50px;   
+}
+.modal button{
+    color:white;
+    background: transparent;
+    border: 3px solid white;
+    padding: 10px;
+    font-size: large;
+    border-radius: 20px;
+    cursor: pointer;
 }

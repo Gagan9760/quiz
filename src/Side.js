@@ -1,6 +1,30 @@
 import React from 'react'
 import { money } from './data'
+import { motion } from 'framer-motion'
 
+const sideVariant = {
+    initial:{
+        opacity:0
+    },
+    final:{
+        opacity:1,
+        transition:{
+            duration:0.2,
+            when:"beforeChildren",
+            staggerChildren: 0.15
+        }
+    }
+}
+const childVariant = {
+    initial:{
+        y:50,
+        opacity:0
+    },
+    final:{
+        y:0,
+        opacity:1
+    }
+}
 
 const Side = ({selectedQues,setPrize,endQues}) => {
     const am = money.map((m)=>m.amount)
@@ -12,13 +36,21 @@ const Side = ({selectedQues,setPrize,endQues}) => {
     
     return (
         <>
-            <div className="side">
+            <motion.div 
+                className="side"
+                variants={sideVariant}
+                initial='initial'
+                animate='final'
+                >
                 {money.map((m)=>{
                     return(
                     
-                        <li key={m.id}   className={`money ${selectedQues===m.id?`active`:``}`}>$ {m.amount}</li>
+                        <motion.li 
+                        variants={childVariant}
+                        key={m.id}   
+                        className={`money ${selectedQues===m.id?`active`:``}`}>$ {m.amount}</motion.li>
                         )})}
-            </div>
+            </motion.div>
         
         </>
     )
