@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-Hosted at : gagan9760.github.io/quiz
+Hosted at : https://gagan9760.github.io/quiz
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
