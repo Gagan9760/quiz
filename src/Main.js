@@ -45,7 +45,7 @@ const Main = ({ selectedQues, setSelectedQues, setEndQues, prize }) => {
     const [end, setEnd] = useState(false)
     const [clock, setClock] = useState()
     const [clockState, setClockState] = useState()
-    const [hurry,setHurry] = useState(false)
+    const [hurry,setHurry] = useState()
 
     var time = null
     var clockTime = null
@@ -93,6 +93,7 @@ const Main = ({ selectedQues, setSelectedQues, setEndQues, prize }) => {
             setClock(prev => prev - 1)
         }, 1000);
         setClockState(clockTime)
+        setHurry(false)
         return () => clearInterval(clockTime)
     }, [selectedQues])
 
