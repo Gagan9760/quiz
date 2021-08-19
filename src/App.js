@@ -12,12 +12,14 @@ const App = () => {
     useEffect(() => {
         setLoading(true)
         setTimeout(() => setLoading(false), 3000)
+        
     }, [])
     return (
         <>
         {loading
             ?
             <div className="loader">
+                <h1>Loading...</h1>
                 <RiseLoader color="white" ></RiseLoader>
             </div>
             :

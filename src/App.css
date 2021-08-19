@@ -111,6 +111,12 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+.loader h1{
+    color:white;
+    margin-bottom: 40px;
+    font-family: 'Nunito', sans-serif;
 }
 @media only screen and (max-width:500px){
     .body{
@@ -137,4 +143,17 @@
     .ans li{
         width: 300px;
     }
+}
+.clock{
+    color: #daab4a;
+    font-size: 60px;
+    margin: 0;
+}
+.clock.hurry{
+    color: red;
+    animation: flash 0.4s ease infinite;
+}
+@keyframes flash {
+    from{opacity: 0;}
+    to{opacity: 1;}
 }
