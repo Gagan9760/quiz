@@ -105,7 +105,13 @@
     border-radius: 20px;
     cursor: pointer;
 }
-
+.loader{
+    background-color: black;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
 @media only screen and (max-width:500px){
     .body{
         flex-direction: column;
