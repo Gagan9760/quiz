@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { questions } from './question'
+// import { questions } from './question'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const parentVariant = {
@@ -37,7 +37,7 @@ const answerVariant = {
         scale: 0.9
     }
 }
-const Main = ({ selectedQues, setSelectedQues, setEndQues, prize }) => {
+const Main = ({ selectedQues, setSelectedQues, setEndQues, prize,questions }) => {
     const [correctAns, setCorrectAns] = useState(0)
     const [color, setColor] = useState(false)
     const [exit, setExit] = useState(3)
@@ -95,6 +95,7 @@ const Main = ({ selectedQues, setSelectedQues, setEndQues, prize }) => {
         setClockState(clockTime)
         setHurry(false)
         return () => clearInterval(clockTime)
+        
     }, [selectedQues])
 
     useEffect(() => {
@@ -106,6 +107,7 @@ const Main = ({ selectedQues, setSelectedQues, setEndQues, prize }) => {
             setEnd(true)
             setHurry(false)
         }
+       
     })
     return (
         <motion.div variants={parentVariant} initial="initial" animate="final" className="main">
